@@ -1,0 +1,16 @@
+server:
+  port: 8100
+
+spring:
+  application:
+    name: registration-api
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://127.0.0.1:5432/registration
+    username: 2222
+    password: 2222
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect

@@ -1,0 +1,13 @@
+package me.senla.api.registration;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+@EnableJpaRepositories
+@SpringBootApplication
+public class RegistrationApi {
+    public static void main(String[] args) {
+        SpringApplication.run(RegistrationApi.class, args);
+    }
+}
