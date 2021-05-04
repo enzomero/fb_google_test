@@ -21,4 +21,4 @@ WORKDIR /workplace
 COPY --from=builder /buildplace/target/*-0.0.1-SNAPSHOT.jar /workplace/application.jar
 RUN chmod a+rwx /workplace/application.jar
 ENV JAVA_OPTS=
-CMD exec java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /workplace/application.jar
+CMD exec java $JAVA_OPTS -jar /workplace/application.jar

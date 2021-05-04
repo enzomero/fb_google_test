@@ -1,3 +1,8 @@
+version: '3.7'
+
+networks:
+  backend:
+
 volumes:
   notify_db:
   registration_db:
@@ -7,6 +12,10 @@ services:
     hostname: notify-api
     build: ./notify-api
     image: net-services:latest
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://notify_db:5432/notify
+      SPRING_DATASOURCE_USERNAME: 1111
+      SPRING_DATASOURCE_PASSWORD: 1111
     ports:
       - "8090:8090"
     expose:
@@ -14,11 +23,17 @@ services:
     restart: unless-stopped
     depends_on:
       - notify_db
+    networks:
+      - backend
 
   registration_api:
     hostname: registration-api
     build: ./registration-api
     image: net-services:latest
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://registration_db:5432/registration
+      SPRING_DATASOURCE_USERNAME: 2222
+      SPRING_DATASOURCE_PASSWORD: 2222
     ports:
       - "8100:8100"
     expose:
@@ -33,28 +48,28 @@ services:
     container_name: notify_db
     image: postgres:12-alpine
     ports:
-      - "127.0.0.1:54320:5432"
-    expose:
-      - 54320
+      - "54320:5432"
     volumes:
       - notify_db:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=1111
-      - POSTGRES_PASSWORD=1111
-      - POSTGRES_DB=notify
+      POSTGRES_USER: 1111
+      POSTGRES_PASSWORD: 1111
+      POSTGRES_DB: notify
     restart: unless-stopped
+    networks:
+      - backend
 
   registration_db:
     container_name: registration_db
     image: postgres:12-alpine
     ports:
-      - "127.0.0.1:54321:5432"
+      - "54321:5432"
     expose:
       - 54321
     volumes:
       - registration_db:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=2222
-      - POSTGRES_PASSWORD=2222
-      - POSTGRES_DB=registration
+      POSTGRES_USER: 2222
+      POSTGRES_PASSWORD: 2222
+      POSTGRES_DB: registration
     restart: unless-stopped
