@@ -1,11 +1,17 @@
 package me.senla.api.registration.controller;
 
-import me.senla.api.registration.dto.UserRegistration;
+import me.senla.api.registration.dto.RegistrationDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import me.senla.api.registration.service.RegistrationService;
 
-@RestController("/mobile")
+import javax.websocket.server.PathParam;
+
+@RestController
+@RequestMapping("/mobile")
 public class RegistrationController {
 
     private final RegistrationService registrationService;
@@ -14,18 +20,15 @@ public class RegistrationController {
         this.registrationService = registrationService;
     }
 
-    @PostMapping("/registration")
-    public String registration(String token, String phone, String appVersion){
-        final UserRegistration userRegistration = UserRegistration.builder()
-                .token(token)
-                .phone(phone)
-                .appVersion(appVersion)
-                .build();
-        return registrationService.register(userRegistration);
+    @PostMapping(value = "/registration", consumes = "application/json")
+    public ResponseEntity<Object> registration(final @RequestBody RegistrationDto registrationDto){
+        boolean register = registrationService.register(registrationDto);
+        return ResponseEntity.status(register ? 204 : 400).build();
     }
 
-    @PostMapping("/oblivion")
-    public String deRegistration(String token){
-        return registrationService.oblivion(token);
+    @PostMapping("/oblivion/{token}")
+    public ResponseEntity<Object> deRegistration(@PathParam(value = "token") String token){
+        boolean oblivion = registrationService.oblivion(token);
+        return ResponseEntity.status(oblivion ? 200 : 400).build();
     }
 }

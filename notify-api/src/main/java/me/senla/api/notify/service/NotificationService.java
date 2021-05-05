@@ -7,8 +7,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 public class NotificationService {
@@ -20,8 +18,7 @@ public class NotificationService {
 
     public List<Notification> getNotifications(final NotificationRequestDto notificationRequestDto){
         PageRequest pageRequest = PageRequest.of(notificationRequestDto.getOffset(), notificationRequestDto.getRange());
-        Iterable<Notification> byPhone = notificationDao.findByPhone(pageRequest, notificationRequestDto.getPhone());
-        return StreamSupport.stream(byPhone.spliterator(), false).collect(Collectors.toList());
+        return notificationDao.findByPhone(pageRequest, notificationRequestDto.getPhone());
     }
 
 

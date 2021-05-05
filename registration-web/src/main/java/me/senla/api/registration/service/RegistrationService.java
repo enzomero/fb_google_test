@@ -1,9 +1,9 @@
 package me.senla.api.registration.service;
 
-import me.senla.api.registration.dto.UserRegistration;
+import me.senla.api.registration.dto.RegistrationDto;
 
 public interface RegistrationService {
-    String register(final UserRegistration userRegistration);
+    boolean register(final RegistrationDto registrationDto);
 
-    String oblivion(final String token);
+    boolean oblivion(final String token);
 }

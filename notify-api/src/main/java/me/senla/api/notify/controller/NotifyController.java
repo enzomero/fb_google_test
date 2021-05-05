@@ -6,12 +6,14 @@ import me.senla.api.notify.dto.NotificationRequestDto;
 import me.senla.api.notify.service.NotificationService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestController("/notifications/storage/")
+@RestController
+@RequestMapping("/notifications/storage")
 public class NotifyController {
 
     private final NotificationService notificationService;

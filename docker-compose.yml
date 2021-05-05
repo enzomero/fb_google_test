@@ -6,12 +6,14 @@ networks:
 volumes:
   notify_db:
   registration_db:
+  zookeeper-data:
+  kafka-data:
 
 services:
   notify_api:
     hostname: notify-api
     build: ./notify-api
-    image: net-services:latest
+    image: net-services:notify_api
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://notify_db:5432/notify
       SPRING_DATASOURCE_USERNAME: 1111
@@ -28,8 +30,8 @@ services:
 
   registration_api:
     hostname: registration-api
-    build: ./registration-api
-    image: net-services:latest
+    build: './registration-api'
+    image: net-services:registration_api
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://registration_db:5432/registration
       SPRING_DATASOURCE_USERNAME: 2222
@@ -41,8 +43,54 @@ services:
     restart: unless-stopped
     depends_on:
       - registration_db
+    networks:
+      - backend
+
+  registration_web:
+    hostname: registration-web
+    build: './registration-web'
+    image: net-services:registration_web
+    environment:
+      BOOTSTRAP: "kafka:9092"
+    ports:
+      - "8110:8110"
+    restart: unless-stopped
+    networks:
+      - backend
+    depends_on:
+      - kafka
 
 ############################################
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 22181:2181
+    networks:
+      - backend
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    ports:
+      - 29092:29092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      APP_KAFKA_TOPICS: "registration:1:1"
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+    depends_on:
+      - zookeeper
+    networks:
+      - backend
+
 
   notify_db:
     container_name: notify_db
@@ -73,3 +121,5 @@ services:
       POSTGRES_PASSWORD: 2222
       POSTGRES_DB: registration
     restart: unless-stopped
+    networks:
+      - backend
