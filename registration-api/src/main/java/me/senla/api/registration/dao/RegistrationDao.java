@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface RegistrationDao extends CrudRepository<Registration, Long> {
     Optional<Registration> removeByToken(final String token);
+    Optional<Registration> findByPhone(final String token);
 }

@@ -1,5 +1,6 @@
 package me.senla.api.notify.controller;
 
+import lombok.extern.log4j.Log4j2;
 import me.senla.api.notify.service.NotificationService;
 import me.senla.api.notify.dto.NotificationDto;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/mobile")
+@Log4j2
 public class PushNotifyController {
 
     private final NotificationService notificationService;
@@ -22,7 +24,16 @@ public class PushNotifyController {
 
     @PostMapping(value = "/push", consumes = "application/json")
     public ResponseEntity<Object> pushNotify(final @Valid @RequestBody NotificationDto notificationDto){
-        boolean notify = notificationService.sendNotify(notificationDto);
-        return ResponseEntity.status(notify ? 204 : 400).build();
+        long counter = 0;
+        try {
+            counter = notificationService.sendNotify(notificationDto);
+            log.info(String.format("Send %s notifications", counter));
+            return ResponseEntity.status(204).body(counter);
+        } catch (Exception e){
+            log.error("Send notifications failed");
+            return ResponseEntity.status(400).body(e.getMessage());
+        } finally {
+            log.info("web notify request - done");
+        }
     }
 }

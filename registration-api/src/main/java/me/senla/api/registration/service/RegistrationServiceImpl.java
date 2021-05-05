@@ -20,4 +20,11 @@ public class RegistrationServiceImpl implements RegistrationService {
     public List<Registration> getRegistrations() {
         return StreamSupport.stream(registrationDao.findAll().spliterator(), false).collect(Collectors.toList());
     }
+
+    @Override
+    public Boolean isRegistered(final String phone) {
+        return registrationDao.findByPhone(phone)
+                .map(registration -> registration.getPhone().equals(phone))
+                .orElse(Boolean.FALSE);
+    }
 }

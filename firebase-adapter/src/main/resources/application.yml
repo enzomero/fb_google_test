@@ -1,0 +1,12 @@
+server:
+  port: 8130
+
+spring:
+  application:
+    name: firebase-adapter
+  kafka:
+    bootstrap-servers: ${BOOTSTRAP:localhost:29092}
+
+sub:
+  host:
+    reg: ${REG_API_HOST:localhost:8100}

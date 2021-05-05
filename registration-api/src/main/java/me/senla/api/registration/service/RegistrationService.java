@@ -4,4 +4,6 @@ import me.senla.api.registration.model.Registration;
 
 public interface RegistrationService {
     Iterable<Registration> getRegistrations();
+
+    Boolean isRegistered(String phone);
 }

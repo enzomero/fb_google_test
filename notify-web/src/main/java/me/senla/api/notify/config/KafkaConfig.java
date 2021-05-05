@@ -1,6 +1,6 @@
 package me.senla.api.notify.config;
 
-import me.senla.api.notify.dto.NotificationDto;
+import me.senla.api.notify.dto.SingleNotificationDto;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,7 +20,7 @@ public class KafkaConfig {
     private String bootstrapAddress;
 
     @Bean
-    public ProducerFactory<String, NotificationDto> producerFactory() {
+    public ProducerFactory<String, SingleNotificationDto> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -29,7 +29,7 @@ public class KafkaConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, NotificationDto> kafkaTemplate() {
+    public KafkaTemplate<String, SingleNotificationDto> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 }
