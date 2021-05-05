@@ -1,9 +1,11 @@
 package me.senla.api.registration.service;
 
+import lombok.extern.log4j.Log4j2;
 import me.senla.api.registration.dto.RegistrationDto;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+@Log4j2
 @Service
 public class RegistrationServiceImpl implements RegistrationService {
 
@@ -15,7 +17,9 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public boolean register(final RegistrationDto registrationDto) {
-        return kafkaTemplate.send("registration", registrationDto).isDone();
+        boolean registration = kafkaTemplate.send("registration", registrationDto).isDone();
+        log.info(String.format("Registration of user [%s] %s", registrationDto.getPhone(), registration ? "started": "failed"));
+        return registration;
     }
 
     @Override
@@ -23,6 +27,8 @@ public class RegistrationServiceImpl implements RegistrationService {
         RegistrationDto obligateRegistration = RegistrationDto.builder()
                 .token(token)
                 .build();
-        return kafkaTemplate.send("registration", obligateRegistration).isDone();
+        boolean registration = kafkaTemplate.send("registration", obligateRegistration).isDone();
+        log.info(String.format("De-registration of user %s", registration ? "started": "failed"));
+        return registration;
     }
 }

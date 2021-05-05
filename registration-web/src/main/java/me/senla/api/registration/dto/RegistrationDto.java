@@ -4,16 +4,14 @@ import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
 public class RegistrationDto {
     @NotBlank
     private String token;
-    @NotEmpty
-    @Size(min = 8, max = 12)
+    @NotNull
     private Integer phone;
     @NotBlank
     private String appVersion;

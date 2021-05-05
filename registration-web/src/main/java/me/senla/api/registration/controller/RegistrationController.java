@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import me.senla.api.registration.service.RegistrationService;
 
+import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
 @RestController
@@ -21,7 +22,7 @@ public class RegistrationController {
     }
 
     @PostMapping(value = "/registration", consumes = "application/json")
-    public ResponseEntity<Object> registration(final @RequestBody RegistrationDto registrationDto){
+    public ResponseEntity<Object> registration(final @Valid @RequestBody RegistrationDto registrationDto){
         boolean register = registrationService.register(registrationDto);
         return ResponseEntity.status(register ? 204 : 400).build();
     }

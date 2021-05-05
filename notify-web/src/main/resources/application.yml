@@ -1,8 +1,8 @@
 server:
-  port: 8110
+  port: 8120
 
 spring:
   application:
-    name: registration-web
+    name: notify-web
   kafka:
     bootstrap-servers: ${BOOTSTRAP:localhost:29092}

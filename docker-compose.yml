@@ -28,9 +28,25 @@ services:
     networks:
       - backend
 
+  notify_web:
+    hostname: notify-web
+    build: ./notify-web
+    image: net-services:notify_web
+    environment:
+      BOOTSTRAP: "kafka:9092"
+    ports:
+      - "8120:8120"
+    expose:
+      - 8120
+    restart: unless-stopped
+    depends_on:
+      - kafka
+    networks:
+      - backend
+
   registration_api:
     hostname: registration-api
-    build: './registration-api'
+    build: ./registration-api
     image: net-services:registration_api
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://registration_db:5432/registration
@@ -48,7 +64,7 @@ services:
 
   registration_web:
     hostname: registration-web
-    build: './registration-web'
+    build: ./registration-web
     image: net-services:registration_web
     environment:
       BOOTSTRAP: "kafka:9092"
@@ -83,7 +99,7 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      APP_KAFKA_TOPICS: "registration:1:1"
+      APP_KAFKA_TOPICS: "registration:1:1,notification:1:1"
     volumes:
       - kafka-data:/var/lib/kafka/data
     depends_on:

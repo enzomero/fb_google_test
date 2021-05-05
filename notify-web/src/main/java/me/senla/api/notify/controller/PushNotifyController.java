@@ -1,13 +1,17 @@
 package me.senla.api.notify.controller;
 
 import me.senla.api.notify.service.NotificationService;
-import me.senla.api.notify.dto.PushNotification;
+import me.senla.api.notify.dto.NotificationDto;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import javax.validation.Valid;
 
 @RestController
+@RequestMapping("/mobile")
 public class PushNotifyController {
 
     private final NotificationService notificationService;
@@ -16,10 +20,9 @@ public class PushNotifyController {
         this.notificationService = notificationService;
     }
 
-    public String pushNotify(String title, String text, Long sendTime, String... phones){
-        PushNotification pushNotification = new PushNotification(title, text, sendTime, new HashSet<String>(Arrays.asList(phones)));
-
-        notificationService.sendNotify(pushNotification);
-        return "";
+    @PostMapping(value = "/push", consumes = "application/json")
+    public ResponseEntity<Object> pushNotify(final @Valid @RequestBody NotificationDto notificationDto){
+        boolean notify = notificationService.sendNotify(notificationDto);
+        return ResponseEntity.status(notify ? 204 : 400).build();
     }
 }

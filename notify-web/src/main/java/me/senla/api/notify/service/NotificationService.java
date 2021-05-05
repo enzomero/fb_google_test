@@ -1,7 +1,7 @@
 package me.senla.api.notify.service;
 
-import me.senla.api.notify.dto.PushNotification;
+import me.senla.api.notify.dto.NotificationDto;
 
 public interface NotificationService {
-    String sendNotify(PushNotification pushNotification);
+    boolean sendNotify(NotificationDto notificationDto);
 }

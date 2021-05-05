@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class NotifyApi {
+public class NotifyWeb {
     public static void main(String[] args) {
-        SpringApplication.run(NotifyApi.class, args);
+        SpringApplication.run(NotifyWeb.class, args);
     }
 }
