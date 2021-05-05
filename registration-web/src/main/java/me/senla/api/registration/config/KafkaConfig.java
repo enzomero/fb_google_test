@@ -1,4 +1,4 @@
-package me.senla.api.registration.kafka;
+package me.senla.api.registration.config;
 
 import me.senla.api.registration.dto.RegistrationDto;
 import org.apache.kafka.clients.producer.ProducerConfig;

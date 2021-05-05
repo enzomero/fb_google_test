@@ -6,11 +6,13 @@ spring:
     name: registration-api
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://127.0.0.1:5432/registration
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://127.0.0.1:54321/registration}
     username: 2222
     password: 2222
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+  kafka:
+    bootstrap-servers: ${BOOTSTRAP:localhost:29092}

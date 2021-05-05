@@ -3,10 +3,7 @@ package me.senla.api.registration.model;
 import lombok.Data;
 import lombok.Getter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -16,8 +13,11 @@ public class Registration {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     private Long id;
+    @Column(unique = true)
     private String token;
+    @Column(nullable = false)
     private String phone;
+    @Column(nullable = false)
     private String appVersion;
 
 }

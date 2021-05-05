@@ -49,6 +49,7 @@ services:
     build: ./registration-api
     image: net-services:registration_api
     environment:
+      BOOTSTRAP: "kafka:9092"
       SPRING_DATASOURCE_URL: jdbc:postgresql://registration_db:5432/registration
       SPRING_DATASOURCE_USERNAME: 2222
       SPRING_DATASOURCE_PASSWORD: 2222
