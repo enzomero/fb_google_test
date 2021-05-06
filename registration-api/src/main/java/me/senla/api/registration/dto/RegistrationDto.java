@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegistrationDto {
-    private Long id;
+    private long id;
     private String token;
-    private String phone;
+    private long phone;
     private String appVersion;
 }

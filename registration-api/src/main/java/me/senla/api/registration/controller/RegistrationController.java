@@ -6,9 +6,11 @@ import me.senla.api.registration.service.RegistrationServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-@RestController("/registration/storage")
+@RestController
+@RequestMapping("/registration/storage")
 public class RegistrationController {
 
     private final RegistrationServiceImpl registrationService;
@@ -26,8 +28,8 @@ public class RegistrationController {
                 .collect(Collectors.toList());
     }
 
-    @PutMapping("/{phone}")
-    public Boolean isRegistered(final @PathVariable(value = "phone") String phone) {
+    @PostMapping(value = "/{phone}", produces ="application/json")
+    public Set<String> isRegistered(final @PathVariable(value = "phone") long phone) {
         return registrationService.isRegistered(phone);
     }
 

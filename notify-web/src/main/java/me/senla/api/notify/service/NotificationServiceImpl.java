@@ -31,7 +31,7 @@ public class NotificationServiceImpl implements NotificationService {
         return collect.size();
     }
 
-    private SingleNotificationDto getSingleNotificationDto(final NotificationDto notificationDto, final String s) {
+    private SingleNotificationDto getSingleNotificationDto(final NotificationDto notificationDto, final long s) {
         return SingleNotificationDto.builder()
                 .sendTime(notificationDto.getSendTime())
                 .title(notificationDto.getTitle())

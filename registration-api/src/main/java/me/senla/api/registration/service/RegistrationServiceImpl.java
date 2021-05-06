@@ -5,6 +5,7 @@ import me.senla.api.registration.model.Registration;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -22,9 +23,11 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public Boolean isRegistered(final String phone) {
-        return registrationDao.findByPhone(phone)
-                .map(registration -> registration.getPhone().equals(phone))
-                .orElse(Boolean.FALSE);
+    public Set<String> isRegistered(final long phone) {
+        String phoneAsString = String.valueOf(phone);
+        return registrationDao.findByPhone(phoneAsString)
+                .stream()
+                .map(Registration::getToken)
+                .collect(Collectors.toSet());
     }
 }

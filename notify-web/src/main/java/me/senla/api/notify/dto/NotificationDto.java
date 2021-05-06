@@ -14,11 +14,11 @@ public class NotificationDto {
     @NotBlank
     private String text;
     @NotNull
-    private Long sendTime;
+    private long sendTime;
     @Size(min = 1)
-    private HashSet<String> phones;
+    private HashSet<Long> phones;
 
-    public NotificationDto(final String title, final String text, final Long sendTime, final HashSet<String> phones) {
+    public NotificationDto(final String title, final String text, final Long sendTime, final HashSet<Long> phones) {
         this.title = title;
         this.text = text;
         this.sendTime = sendTime;

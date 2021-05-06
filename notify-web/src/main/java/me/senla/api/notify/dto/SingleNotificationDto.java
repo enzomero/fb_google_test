@@ -1,13 +1,17 @@
 package me.senla.api.notify.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class SingleNotificationDto {
     private String title;
     private String text;
-    private Long sendTime;
-    private String phone;
+    private long sendTime;
+    private long phone;
 }

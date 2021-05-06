@@ -77,6 +77,23 @@ services:
     depends_on:
       - kafka
 
+  firebase_adapter:
+    hostname: firebase-adapter
+    build: ./firebase-adapter
+    image: net-services:firebase_adapter
+    environment:
+      BOOTSTRAP: "kafka:9092"
+      REG_API_HOST: registration-api:8100
+    ports:
+      - "8130:8130"
+    expose:
+      - 8130
+    restart: unless-stopped
+    networks:
+      - backend
+    depends_on:
+      - kafka
+
 ############################################
 
   zookeeper:
@@ -107,7 +124,6 @@ services:
       - zookeeper
     networks:
       - backend
-
 
   notify_db:
     container_name: notify_db
