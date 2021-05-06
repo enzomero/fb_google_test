@@ -1,9 +1,9 @@
-package me.senla.fb.adapter.dto.serdes;
+package me.senla.api.notify.dto.serdes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import me.senla.fb.adapter.dto.SingleNotificationDto;
+import me.senla.api.notify.dto.SingleNotificationDto;
 import org.apache.kafka.common.serialization.Serializer;
 
 import java.util.Map;
@@ -25,7 +25,7 @@ public class SingleNotificationSerializer implements Serializer<SingleNotificati
     public byte[] serialize(final String s, final SingleNotificationDto singleNotificationDto) {
         byte[] retVal = null;
         try {
-            retVal = objectMapper.writeValueAsString(singleNotificationDto).getBytes();
+            retVal = objectMapper.writeValueAsString(s).getBytes();
         } catch (Exception e) {
             log.error(String.format("Fail to serialize: [%s]%n%s", singleNotificationDto.toString(), e.getMessage()));
         }

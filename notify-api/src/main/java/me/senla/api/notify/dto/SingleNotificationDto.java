@@ -1,15 +1,17 @@
 package me.senla.api.notify.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.HashSet;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-public class NotificationDto {
+@NoArgsConstructor
+@AllArgsConstructor
+public class SingleNotificationDto {
     private String title;
     private String text;
     private long sendTime;
-    private HashSet<Long> phones;
+    private long phone;
 }

@@ -6,7 +6,7 @@ spring:
     name: notify-api
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://127.0.0.1:54320/notify
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://127.0.0.1:54320/notify}
     username: 1111
     password: 1111
   jpa:
@@ -14,3 +14,5 @@ spring:
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+  kafka:
+    bootstrap-servers: ${BOOTSTRAP:localhost:29092}

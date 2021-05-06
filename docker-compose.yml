@@ -10,23 +10,21 @@ volumes:
   kafka-data:
 
 services:
-  notify_api:
-    hostname: notify-api
-    build: ./notify-api
-    image: net-services:notify_api
+  registration_web:
+    hostname: registration-web
+    build: ./registration-web
+    image: net-services:registration_web
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://notify_db:5432/notify
-      SPRING_DATASOURCE_USERNAME: 1111
-      SPRING_DATASOURCE_PASSWORD: 1111
+      BOOTSTRAP: "kafka:9092"
     ports:
-      - "8090:8090"
+      - "8110:8110"
     expose:
-      - 8090
+      - 8110
     restart: unless-stopped
-    depends_on:
-      - notify_db
     networks:
       - backend
+    depends_on:
+      - kafka
 
   notify_web:
     hostname: notify-web
@@ -41,6 +39,25 @@ services:
     restart: unless-stopped
     depends_on:
       - kafka
+    networks:
+      - backend
+
+  notify_api:
+    hostname: notify-api
+    build: ./notify-api
+    image: net-services:notify_api
+    environment:
+      BOOTSTRAP: "kafka:9092"
+      SPRING_DATASOURCE_URL: jdbc:postgresql://notify_db:5432/notify
+      SPRING_DATASOURCE_USERNAME: 1111
+      SPRING_DATASOURCE_PASSWORD: 1111
+    ports:
+      - "8090:8090"
+    expose:
+      - 8090
+    restart: unless-stopped
+    depends_on:
+      - notify_db
     networks:
       - backend
 
@@ -62,20 +79,6 @@ services:
       - registration_db
     networks:
       - backend
-
-  registration_web:
-    hostname: registration-web
-    build: ./registration-web
-    image: net-services:registration_web
-    environment:
-      BOOTSTRAP: "kafka:9092"
-    ports:
-      - "8110:8110"
-    restart: unless-stopped
-    networks:
-      - backend
-    depends_on:
-      - kafka
 
   firebase_adapter:
     hostname: firebase-adapter

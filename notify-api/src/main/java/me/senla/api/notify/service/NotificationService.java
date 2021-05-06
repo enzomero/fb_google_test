@@ -1,7 +1,7 @@
 package me.senla.api.notify.service;
 
-import me.senla.api.notify.dto.NotificationRequestDto;
 import me.senla.api.notify.dao.NotificationDao;
+import me.senla.api.notify.dto.NotificationRequestDto;
 import me.senla.api.notify.model.Notification;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
