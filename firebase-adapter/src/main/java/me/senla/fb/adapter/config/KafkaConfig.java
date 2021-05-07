@@ -54,8 +54,10 @@ public class KafkaConfig {
 
         KStream<String, SingleNotificationDto> peek = stream
                 .mapValues(registrationHandler::hasDevices)
-                .filter((key, value) -> Objects.nonNull(value))
+                .filter((key, value) -> !value.isEmpty())//ignore fails
+                .flatMapValues(value -> value)
                 .mapValues(firebaseService::push)
+                .filter((key, value) -> Objects.nonNull(value))//ignore fails
                 .peek((key, value) -> log.info(String.format("STREAM[K:%s|V:%S]", key, value)));
 
         peek.to(T_OUTPUT, Produced.with(Serdes.String(),
