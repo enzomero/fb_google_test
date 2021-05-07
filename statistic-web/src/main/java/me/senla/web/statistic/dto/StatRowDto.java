@@ -8,5 +8,5 @@ import lombok.Data;
 public class StatRowDto {
     private String version;
     private Long numberOfRegistration;
-    private Long numberOfUniq;
+    private Long numberOfUniqPhones;
 }

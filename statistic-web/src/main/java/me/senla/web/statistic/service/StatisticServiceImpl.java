@@ -5,14 +5,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @Service
 public class StatisticServiceImpl implements StatisticService {
     @Override
     public Collection<StatRowDto> getRegistrations() {
+
         //ask reg db
         //filter
-        return Collections.emptyList();
+        return List.of(StatRowDto.builder().build());
     }
 
     @Override

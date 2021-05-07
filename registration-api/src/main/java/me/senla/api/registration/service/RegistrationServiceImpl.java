@@ -1,6 +1,7 @@
 package me.senla.api.registration.service;
 
 import me.senla.api.registration.dao.RegistrationDao;
+import me.senla.api.registration.dto.StatRowDto;
 import me.senla.api.registration.model.Registration;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,19 @@ public class RegistrationServiceImpl implements RegistrationService {
         return registrationDao.findByPhone(phoneAsString)
                 .stream()
                 .map(Registration::getToken)
+                .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<StatRowDto> getVersionsApps() {
+        return registrationDao.findDistinctAppVersions()
+                .stream()
+                .map(s -> new StatRowDto().setVersion(s))
+                .map(statRowDto -> statRowDto
+                        .setNumberOfRegistration(
+                                registrationDao.countAllByAppVersion(statRowDto.getVersion())))
+                .map(statRowDto -> statRowDto.setNumberOfUniqPhones(
+                        registrationDao.findDistinctPhoneByAppVersion(statRowDto.getVersion())))
                 .collect(Collectors.toSet());
     }
 }

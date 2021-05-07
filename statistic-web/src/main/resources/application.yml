@@ -1,0 +1,11 @@
+server:
+  port: 8130
+
+spring:
+  application:
+    name: statistic-web
+
+sub:
+  host:
+    reg: ${REG_API_HOST:localhost:8100}
+    ntf: ${NTF_API_HOST:localhost:8090}

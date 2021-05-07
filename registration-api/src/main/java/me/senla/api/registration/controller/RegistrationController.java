@@ -2,7 +2,8 @@ package me.senla.api.registration.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.senla.api.registration.dto.RegistrationDto;
-import me.senla.api.registration.service.RegistrationServiceImpl;
+import me.senla.api.registration.dto.StatRowDto;
+import me.senla.api.registration.service.RegistrationService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,10 +14,10 @@ import java.util.stream.Collectors;
 @RequestMapping("/registration/storage")
 public class RegistrationController {
 
-    private final RegistrationServiceImpl registrationService;
+    private final RegistrationService registrationService;
     private final ObjectMapper objectMapper;
 
-    public RegistrationController(final RegistrationServiceImpl registrationService, final ObjectMapper objectMapper) {
+    public RegistrationController(final RegistrationService registrationService, final ObjectMapper objectMapper) {
         this.registrationService = registrationService;
         this.objectMapper = objectMapper;
     }
@@ -31,6 +32,11 @@ public class RegistrationController {
     @PostMapping(value = "/{phone}", produces ="application/json")
     public Set<String> isRegistered(final @PathVariable(value = "phone") long phone) {
         return registrationService.isRegistered(phone);
+    }
+
+    @GetMapping(value = "/uniq", produces ="application/json")
+    public Set<StatRowDto> isRegistered() {
+        return registrationService.getVersionsApps();
     }
 
 }
