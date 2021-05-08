@@ -1,6 +1,6 @@
 # Push-notification system based on Firebase Could Message.
 
-(diagram.png)
+[diagram](https://github.com/enzomero/fb_google_test/blob/master/diagram.png?raw=true)
 
 ## Sequences diagram
 
