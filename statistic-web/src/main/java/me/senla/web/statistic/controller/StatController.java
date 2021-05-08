@@ -1,9 +1,7 @@
 package me.senla.web.statistic.controller;
 
+import me.senla.web.statistic.dto.StatRowDto;
 import me.senla.web.statistic.service.StatisticService;
-import org.springframework.stereotype.Controller;
-
-import java.util.Collection;
 
 //Need web site to show it
 @Controller
