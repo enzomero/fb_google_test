@@ -1,5 +1,7 @@
 # Push-notification system based on Firebase Could Message.
 
+(diagram.png)
+
 ## Sequences diagram
 
 ### 1 Registration
