@@ -97,6 +97,21 @@ services:
     depends_on:
       - kafka
 
+  statistic_web:
+    hostname: statistic-web
+    build: ./statistic-web
+    image: net-services:statistic_web
+    environment:
+      REG_API_HOST: registration-api:8100
+      NTF_API_HOST: notify-api:8090
+    ports:
+      - "8140:8140"
+    expose:
+      - 8140
+    restart: unless-stopped
+    networks:
+      - backend
+
 ############################################
 
   zookeeper:

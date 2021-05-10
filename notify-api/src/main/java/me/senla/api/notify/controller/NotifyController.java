@@ -4,10 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import me.senla.api.notify.dto.NotificationRequestDto;
 import me.senla.api.notify.dto.SingleNotificationDto;
 import me.senla.api.notify.service.NotificationService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +21,7 @@ public class NotifyController {
         this.objectMapper = objectMapper;
     }
 
-    @GetMapping(value = "/", consumes = "application/json")
+    @PutMapping(value = "/", consumes = "application/json")
     public List<SingleNotificationDto> notificationDtos(final @RequestBody NotificationRequestDto notificationRequestDto){
         return notificationService.getNotifications(notificationRequestDto)
                 .stream()

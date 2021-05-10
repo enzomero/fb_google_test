@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1"/>
+    <title>Registration statistic</title>
+</head>
+<body>
+<div id="header">
+    <h1>Registration statistic</h1>
+</div>
+
+<form>
+    <p>
+        <a th:href="@{/}">Home</a>
+    </p>
+</form>
+
+<table>
+    <tr>
+        <th>App version</th>
+        <th>Total amount</th>
+        <th>Uniq amount</th>
+    </tr>
+    <tr th:each="reg:${registrations}">
+        <td>
+            <span th:text="${reg.version}" ></span>
+        </td>
+        <td>
+            <span th:text="${reg.numberOfRegistration}" ></span>
+        </td>
+        <td>
+            <span th:text="${reg.numberOfUniqPhones}" ></span>
+        </td>
+    </tr>
+</table>
+<footer>
+</footer>
+</body>
+</html>

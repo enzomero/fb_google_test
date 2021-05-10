@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "8968ebe8-d2f8-4680-8323-c9a2287d23d4",
+		"name": "beline",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "registration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n    \"token\": \"dasdasdasd1aasdfww3f2aaasdasd\",\n    \"phone\": 375331234567,\n    \"appVersion\": \"asdadasd\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8110/mobile/registration",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8110",
+					"path": [
+						"mobile",
+						"registration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "notification",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"teaa2121asdasd asd s22d sts\",\n    \"text\":\"wed!\",\n    \"sendTime\":11111111,\n    \"phones\":[\n        375331234567\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8120/mobile/push",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8120",
+					"path": [
+						"mobile",
+						"push"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "isRegistred",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8100/registration/storage/375331234567",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8100",
+					"path": [
+						"registration",
+						"storage",
+						"375331234567"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pull notifications",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"range\":20,\n        \"offset\":0,\n        \"phone\": \"375331234567\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/notifications/storage/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"notifications",
+						"storage",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reg stat",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8100/registration/storage/uniq",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8100",
+					"path": [
+						"registration",
+						"storage",
+						"uniq"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

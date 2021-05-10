@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1"/>
+    <title>Notifications</title>
+</head>
+<body>
+<div id="header">
+    <h1>Notifications</h1>
+</div>
+
+<form>
+    <p>
+        <a th:href="@{/}">Home</a>
+    </p>
+</form>
+
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Text</th>
+        <th>SendTime</th>
+        <th>Phone</th>
+    </tr>
+    <tr th:each="ntf:${notifications}">
+        <td>
+            <span th:text="${ntf.title}" ></span>
+        </td>
+        <td>
+            <span th:text="${ntf.text}" ></span>
+        </td>
+        <td>
+            <span th:text="${ntf.sendTime}" ></span>
+        </td>
+        <td>
+            <span th:text="${ntf.phone}" ></span>
+        </td>
+    </tr>
+</table>
+
+<footer>
+</footer>
+</body>
+</html>

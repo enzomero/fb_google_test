@@ -1,26 +1,32 @@
 package me.senla.web.statistic.service;
 
+import me.senla.web.statistic.dto.NotificationRequestDto;
+import me.senla.web.statistic.dto.SingleNotificationDto;
 import me.senla.web.statistic.dto.StatRowDto;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 @Service
 public class StatisticServiceImpl implements StatisticService {
+
+    private final RegistrationHandler registrationHandler;
+    private final NotificationHandler notificationHandler;
+
+    public StatisticServiceImpl(final RegistrationHandler registrationHandler, final NotificationHandler notificationHandler) {
+        this.registrationHandler = registrationHandler;
+        this.notificationHandler = notificationHandler;
+    }
+
     @Override
     public Collection<StatRowDto> getRegistrations() {
-
-        //ask reg db
-        //filter
-        return List.of(StatRowDto.builder().build());
+        return registrationHandler.getRegistrationStatistic();
     }
 
     @Override
-    public Collection<String> getNotifications(final String phone) {
-        //ask msg db by phone
-        //map
-        return Collections.emptyList();
+    public Collection<SingleNotificationDto> getNotifications(final NotificationRequestDto notificationRequestDto) {
+        return notificationHandler.getNotifications(notificationRequestDto);
     }
+
+
 }

@@ -2,8 +2,8 @@ package me.senla.web.statistic.service;
 
 import me.senla.web.statistic.dto.StatRowDto;
 
-import java.util.List;
+import java.util.Set;
 
 public interface RegistrationHandler {
-    List<StatRowDto> getRegistrationStatistic();
+    Set<StatRowDto> getRegistrationStatistic();
 }
