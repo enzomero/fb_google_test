@@ -20,6 +20,7 @@
   You should get smth like that:
 
 
+
     CONTAINER ID   IMAGE                              COMMAND                  CREATED             STATUS             PORTS                                                                                  NAMES
     f87fad8b0d9b   net-services:statistic_web         "/bin/sh -c 'exec ja…"   6 minutes ago       Up 6 minutes       0.0.0.0:8140->8140/tcp, :::8140->8140/tcp                                              beline_statistic_web_1
     fa19537bc7df   net-services:registration_api      "/bin/sh -c 'exec ja…"   13 minutes ago      Up 13 minutes      0.0.0.0:8100->8100/tcp, :::8100->8100/tcp                                              beline_registration_api_1
@@ -32,6 +33,8 @@
     188df45b7a6a   postgres:12-alpine                 "docker-entrypoint.s…"   3 days ago          Up 3 days          54321/tcp, 0.0.0.0:54321->5432/tcp, :::54321->5432/tcp                                 registration_db
     6ae92c302f2e   postgres:12-alpine                 "docker-entrypoint.s…"   3 days ago          Up 3 days          0.0.0.0:54320->5432/tcp, :::54320->5432/tcp                                            notify_db
     95035778ba7f   portainer/portainer                "/portainer"             3 days ago          Up 3 days          0.0.0.0:8000->8000/tcp, :::8000->8000/tcp, 0.0.0.0:9000->9000/tcp, :::9000->9000/tcp   portainer
+
+
 
 ### Testing ###
 
