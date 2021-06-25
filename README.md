@@ -5,7 +5,7 @@
 * Octopus Deploy - I have not enough time to integrate it. I used docker-compose. 
 * Error handling - my solution has async model of communication and error handling should look like extra statistic flow 
   to collect all result of action in separated DB. Not enough time to finish it. I made more logs.
-
+dsfdsfsdfsdfsdf
 ## How to run it ##
 
 ### Deploy and launch ###
